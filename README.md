@@ -12,6 +12,10 @@ Given that the test is not timed, you are expected to showcase some of your skil
 *   You will be questioned on your coding practices and design choices (both technical and aesthetic). 
 *   Questioning and solution walkthrough is expected to take around 30 minutes.
 
+## Setup
+*   Clone this repository
+*   Create a branch to identify your code, e.g. firstname-surname
+*   Describe your changes through commit messages as you work on your solution
 
 ## Requirements
 
