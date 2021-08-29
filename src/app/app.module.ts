@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { MatTableModule } from '@angular/material/table';
     BrowserAnimationsModule,
     MatTableModule,
     MatSliderModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
