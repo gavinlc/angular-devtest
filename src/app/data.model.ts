@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+
 export type Data = {
   id: string;
   age: number;
@@ -9,4 +11,6 @@ export type Data = {
   registered: string;
   message: string;
   favouriteSport: string;
+  activeMinutes?: number;
+  registeredDate?: DateTime;
 };
