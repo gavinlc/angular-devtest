@@ -49,7 +49,7 @@
   <ng-container matColumnDef="activeMinutes">
     <th mat-header-cell *matHeaderCellDef>Active Minutes</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.activeMinutes | async }}
+      {{ element.activeMinutes | m2h }}
     </td>
   </ng-container>
 

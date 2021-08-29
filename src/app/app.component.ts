@@ -65,10 +65,20 @@ export class AppComponent implements OnInit {
       //remove space to date to make it parsable
       const date = member.registered.split(' ').join('');
       member.registeredDate = DateTime.fromISO(date);
+      member.activeMinutes = this.extractDataFromString(member.message);
     });
 
     return processedData;
   }
 
-  extractDataFromString() {}
+  extractDataFromString(input: string): number {
+    const match = input.match(/[0-9]+/g);
+    // TODO: one entry is entered as "twenty", so will result in no match
+    if (match?.length) {
+      const number = parseInt(match[0]);
+      return number;
+    } else {
+      return 0;
+    }
+  }
 }

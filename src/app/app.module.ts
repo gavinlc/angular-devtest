@@ -12,9 +12,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MinutesToHours } from './m2h.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MinutesToHours],
   imports: [
     BrowserModule,
     HttpClientModule,
