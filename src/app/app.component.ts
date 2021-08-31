@@ -1,20 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Data } from './data.model';
 
 import { DateTime } from 'luxon';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  public title = 'devtest-nontimed';
+export class AppComponent implements OnInit, AfterViewInit {
+  public title = 'evergreen life: devtest-nontimed';
 
   public data: Data[] = [];
-  public filteredData: Data[] = [];
+
+  public dataSource = new MatTableDataSource<Data>();
 
   public displayedColumns: string[] = [
     'name',
@@ -28,12 +31,22 @@ export class AppComponent implements OnInit {
     end: null,
   };
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(private http: HttpClient) {}
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   ngOnInit() {
     this.http.get<Data[]>('assets/members.json').subscribe((data) => {
+      // save all the data
       this.data = this.processData(data);
-      this.filteredData = this.data;
+      //wrap filtered data for pagination
+      this.dataSource = new MatTableDataSource<Data>(this.data);
+      //add paginator
+      this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -46,7 +59,7 @@ export class AppComponent implements OnInit {
   }
 
   filterResults() {
-    this.filteredData = this.data.filter((member) => {
+    const filteredData = this.data.filter((member) => {
       if (member.registeredDate && this.range.start && this.range.end) {
         return (
           member.registeredDate >= this.range.start &&
@@ -56,13 +69,21 @@ export class AppComponent implements OnInit {
         return true;
       }
     });
+
+    // update data in datasource
+    this.dataSource.data = filteredData;
+
+    // move back to first page if filtered
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   processData(data: Data[]) {
-    //run through members and convert & extract data
+    // run through members and convert & extract data
     const processedData = [...data];
     processedData.map((member) => {
-      //remove space to date to make it parsable
+      // remove space to date to make it parsable
       const date = member.registered.split(' ').join('');
       member.registeredDate = DateTime.fromISO(date);
       member.activeMinutes = this.extractDataFromString(member.message);

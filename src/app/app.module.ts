@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MinutesToHours } from './m2h.pipe';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [AppComponent, MinutesToHours],
@@ -31,6 +32,7 @@ import { MatCardModule } from '@angular/material/card';
     MatFormFieldModule,
     MatSortModule,
     MatCardModule,
+    MatPaginatorModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent],

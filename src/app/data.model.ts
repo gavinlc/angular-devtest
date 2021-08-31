@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 
 export type Data = {
-  id: string;
+  _id: string;
   age: number;
   eyeColor: string;
   name: string;

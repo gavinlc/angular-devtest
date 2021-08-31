@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <span>{{ title }}</span>
 </mat-toolbar>
 <mat-card class="card">
@@ -23,7 +23,7 @@
   <table
     mat-table
     matSort
-    [dataSource]="filteredData"
+    [dataSource]="dataSource"
     class="mat-elevation-z8 card__data-table"
   >
     <!-- Name Column -->
@@ -57,4 +57,11 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[20, 50, 100]"
+    showFirstLastButtons
+    aria-label="Select page of members"
+  >
+  </mat-paginator>
 </mat-card>
